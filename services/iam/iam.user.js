@@ -1,7 +1,7 @@
 const { ListGroupsForUserCommand   } = require ('@aws-sdk/client-iam');
-const { IAMBaseUser } = require('./iam.user.base');
+const { IAMBase } = require('./iam.base');
 
-class IAMUser extends IAMBaseUser
+class IAMUser extends IAMBase
 {
     async geUserGroups(userName)
     {

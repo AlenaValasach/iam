@@ -1,7 +1,8 @@
-const { IAMClient } = require ('@aws-sdk/client-iam');
-const { AWS_CONFIG } = require('../../../aws.config');
 
-class IAMBaseUser
+const { IAMClient } = require ('@aws-sdk/client-iam');
+const { AWS_CONFIG } = require('../../aws.config');
+
+class IAMBase
 {
     constructor()
     {
@@ -11,8 +12,9 @@ class IAMBaseUser
     
         const credentials = { accessKeyId, secretAccessKey, region };
     
+        this.accountId = AWS_CONFIG.accountId;
         this.client = new IAMClient(credentials);
     }
 }
 
-module.exports = { IAMBaseUser }
+module.exports = { IAMBase }

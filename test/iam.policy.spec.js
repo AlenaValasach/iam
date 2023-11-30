@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { IAMPolicy } = require('../services/iam/iam.policy/iam.policy');
+const { IAMPolicy } = require('../services/iam/iam.policy');
 
 let expectedPolicies = require('../test/data/iam.policy.json');
 

@@ -1,5 +1,5 @@
 const { AWS_CONFIG } = require('../aws.config');
-const { IAMUser } = require('../services/iam/iam.user/iam.user');
+const { IAMUser } = require('../services/iam/iam.user');
 const assert = require('node:assert/strict');
 
 let expectedUsers = require('../test/data/iam.user.json');

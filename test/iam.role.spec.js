@@ -1,5 +1,5 @@
 const { AWS_CONFIG } = require('../aws.config');
-const { IAMRole } = require('../services/iam/iam.role/iam.role');
+const { IAMRole } = require('../services/iam/iam.role');
 const assert = require('node:assert/strict');
 
 let expectedRoles = require('../test/data/iam.role.json');

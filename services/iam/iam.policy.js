@@ -1,7 +1,7 @@
-const { IAMBasePolicy } = require ("./iam.policy.base");
+const { IAMBase } = require("./iam.base");
 const { GetPolicyCommand, GetPolicyVersionCommand } = require ('@aws-sdk/client-iam');
 
-class IAMPolicy extends IAMBasePolicy
+class IAMPolicy extends IAMBase
 {
     async getPolicy(policyName)
     {

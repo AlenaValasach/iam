@@ -1,7 +1,7 @@
 const { GetRoleCommand, ListAttachedRolePoliciesCommand   } = require ('@aws-sdk/client-iam');
-const { IAMBaseRole } = require('./iam.role.base');
+const { IAMBase } = require('./iam.base');
 
-class IAMRole extends IAMBaseRole
+class IAMRole extends IAMBase
 {
     async getRole(roleName)
     {
