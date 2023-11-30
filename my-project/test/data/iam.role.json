@@ -1,0 +1,32 @@
+[
+    {
+        "RoleName": "FullAccessRoleEC2",
+        "Policies":
+        [
+            {
+                "PolicyArn": "arn:aws:iam::accountId:policy/FullAccessPolicyEC2",
+                "PolicyName": "FullAccessPolicyEC2"
+            }
+        ]
+    },
+    {
+        "RoleName": "FullAccessRoleS3",
+        "Policies":
+        [
+            {
+                "PolicyArn": "arn:aws:iam::accountId:policy/FullAccessPolicyS3",
+                "PolicyName": "FullAccessPolicyS3"
+            }
+        ]
+    },
+    {
+        "RoleName": "ReadAccessRoleS3",
+        "Policies":
+        [
+            {
+                "PolicyArn": "arn:aws:iam::accountId:policy/ReadAccessPolicyS3",
+                "PolicyName": "ReadAccessPolicyS3"
+            }
+        ]
+    }
+]

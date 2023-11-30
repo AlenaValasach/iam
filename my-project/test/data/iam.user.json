@@ -1,0 +1,41 @@
+[
+    {
+        "UserName": "FullAccessUserEC2",
+        "Groups":
+        [
+            {
+                "Arn": "arn:aws:iam::accountId:group/FullAccessGroupEC2",
+                "CreateDate": "Thu Nov 30 2023 09:39:52 GMT+0300 (Moscow Standard Time)",
+                "GroupId": "AGPAW27YRJQI57KMPEVXO",
+                "GroupName": "FullAccessGroupEC2",
+                "Path": "/"
+            }
+        ]
+    },
+    {
+        "UserName": "FullAccessUserS3",
+        "Groups":
+        [
+            {
+                "Arn": "arn:aws:iam::accountId:group/FullAccessGroupS3",
+                "CreateDate": "Thu Nov 30 2023 09:39:51 GMT+0300 (Moscow Standard Time)",
+                "GroupId": "AGPAW27YRJQITVIBRF6IG",
+                "GroupName": "FullAccessGroupS3",
+                "Path": "/"
+            }
+        ]
+    },
+    {
+        "UserName": "ReadAccessUserS3",
+        "Groups":
+        [
+            {
+                "Arn": "arn:aws:iam::accountId:group/ReadAccessGroupS3",
+                "CreateDate": "Thu Nov 30 2023 09:39:52 GMT+0300 (Moscow Standard Time)",
+                "GroupId": "AGPAW27YRJQI4C56IN5AR",
+                "GroupName": "ReadAccessGroupS3",
+                "Path": "/"
+            }
+        ]
+    }
+]
