@@ -2,9 +2,6 @@
   "type": "module",
   "name": "my-project",
   "version": "0.1.0",
-  "bin": {
-    "my-project": "bin/my-project.js"
-  },
   "scripts": {
     "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
     "cdk": "cdk",
