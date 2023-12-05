@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
-const { IAMPolicy } = require('../services/iam/iam.policy');
+const { IAMPolicy } = require('../../services/iam/iam.policy');
 
-let expectedPolicies = require('../test/data/iam.policy.json');
+let expectedPolicies = require('../data/iam.policy.json');
 
 expectedPolicies.forEach(data => { 
     test(`Get IAM policies ${data.PolicyName}`, async () => {

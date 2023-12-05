@@ -1,8 +1,8 @@
-const { AWS_CONFIG } = require('../aws.config');
-const { IAMUser } = require('../services/iam/iam.user');
+const { AWS_CONFIG } = require('../../aws.config');
+const { IAMUser } = require('../../services/iam/iam.user');
 const assert = require('node:assert/strict');
 
-let expectedUsers = require('../test/data/iam.user.json');
+let expectedUsers = require('../data/iam.user.json');
 
 expectedUsers.forEach(data => { 
   test(`Get IAM users ${data.UserName}`, async () => {

@@ -1,8 +1,8 @@
-const { AWS_CONFIG } = require('../aws.config');
-const { IAMRole } = require('../services/iam/iam.role');
+const { AWS_CONFIG } = require('../../aws.config');
+const { IAMRole } = require('../../services/iam/iam.role');
 const assert = require('node:assert/strict');
 
-let expectedRoles = require('../test/data/iam.role.json');
+let expectedRoles = require('../data/iam.role.json');
 
 expectedRoles.forEach(data => { 
   test(`Get IAM roles ${data.RoleName}`, async () => {

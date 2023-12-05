@@ -1,0 +1,90 @@
+[
+    {
+        "InstanceName": "cloudxinfo/PublicInstance/Instance",
+        "SecurityGroupName": "cloudxinfo/PublicInstance/SecurityGroup",
+        "InstanceType": "t2.micro",
+        "tags": ["Name", "cloudx"],
+        "os": "Linux/UNIX",
+        "VolumeSize": 8,
+        "VolumeType": "gp2",
+        "isPublic": true,
+        "IpPermissions":
+        [
+            {
+                "FromPort":80,
+                "ToPort":80,
+                "IpProtocol":"tcp",
+                "IpRanges": 
+                [
+                    { 
+                        "CidrIp": "0.0.0.0/0", 
+                        "Description": "HTTP from Internet" 
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": [],
+                "UserIdGroupPairs": []
+            },
+            {
+                "FromPort":22,
+                "ToPort":22,
+                "IpProtocol":"tcp",
+                "IpRanges": 
+                [
+                    { 
+                        "CidrIp": "0.0.0.0/0", 
+                        "Description": "SSH from Internet" 
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": [],
+                "UserIdGroupPairs": []
+            }
+        ]
+    },
+    {
+        "InstanceName": "cloudxinfo/PrivateInstance/Instance",
+        "SecurityGroupName": "cloudxinfo/PrivateInstance/SecurityGroup",
+        "InstanceType": "t2.micro",
+        "tags": ["Name", "cloudx"],
+        "os": "Linux/UNIX",
+        "VolumeSize": 8,
+        "VolumeType": "gp2",
+        "isPublic": false,
+        "IpPermissions":
+        [
+            {
+                "FromPort":80,
+                "ToPort":80,
+                "IpProtocol":"tcp",
+                "IpRanges": [],
+                "Ipv6Ranges": [],
+                "PrefixListIds": [],
+                "UserIdGroupPairs": 
+                [
+                    { 
+                        "GroupId": "", 
+                        "UserId": "",
+                        "Description": "HTTP from Internet" 
+                    }
+                ]
+            },
+            {
+                "FromPort":22,
+                "ToPort":22,
+                "IpProtocol":"tcp",
+                "IpRanges": [],
+                "Ipv6Ranges": [],
+                "PrefixListIds": [],
+                "UserIdGroupPairs": 
+                [
+                    { 
+                        "GroupId": "", 
+                        "UserId": "",
+                        "Description": "SSH from Internet" 
+                    }
+                ]
+            }
+        ]
+    }
+]
