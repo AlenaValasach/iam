@@ -1,0 +1,14 @@
+[
+    {
+        "VpcName": "cloudxinfo/Network/Vpc",
+        "IsDefault": false,
+        "CidrBlock": "10.0.0.0/16",
+        "tags": ["Name", "cloudx"]
+    },
+    {
+        "VpcName": "",
+        "IsDefault": true,
+        "CidrBlock": "172.31.0.0/16"
+    }
+
+]
