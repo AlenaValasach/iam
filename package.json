@@ -13,10 +13,16 @@
   },
   "dependencies": {
     "@aws-sdk/client-ec2": "^3.465.0",
+    "@aws-sdk/client-ec2-instance-connect": "^3.474.0",
     "@aws-sdk/client-iam": "^3.460.0",
+    "@aws-sdk/client-s3": "^3.473.0",
     "aws-cdk-lib": "2.111.0",
     "axios": "^1.6.2",
     "constructs": "^10.0.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "form-data": "^4.0.0",
+    "fs-extra": "^11.2.0",
+    "ssh2": "^1.14.0",
+    "ssh2-sftp-client": "^9.1.0"
   }
 }
