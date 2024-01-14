@@ -1,4 +1,4 @@
-const { GetRoleCommand, ListAttachedRolePoliciesCommand   } = require ('@aws-sdk/client-iam');
+const { GetRoleCommand, ListAttachedRolePoliciesCommand, ListRolesCommand   } = require ('@aws-sdk/client-iam');
 const { IAMBase } = require('./iam.base');
 
 class IAMRole extends IAMBase
@@ -34,6 +34,14 @@ class IAMRole extends IAMBase
         const response = await this.client.send(command);
 
         return response.AttachedPolicies;
+    }
+
+    async getRoles()
+    {
+        const command = new ListRolesCommand({});
+        const response = await this.client.send(command);
+
+        return response;
     }
 }
 

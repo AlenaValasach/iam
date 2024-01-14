@@ -21,6 +21,9 @@ const { S3GetObject } = require('../../services/s3/s3.getObject');
 const { S3GetListObjects } = require('../../services/s3/s3.getListObjects');
 const { S3DeleteObject } = require('../../services/s3/s3.deleteObject');
 
+let bucketName = "cloudximage-imagestorebucket";
+let newBucketName = "cloudxserverless-imagestorebucket";
+
 
 // Skip due to Error: PermanentRedirect: The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint
 /* test.skip("Upload images to the S3 bucket", async () => {
@@ -72,7 +75,7 @@ test("Download images from the S3 bucket", async () => {
     let s3ListBuckets = new S3ListBuckets();
     let buckets = await s3ListBuckets.getListBuckets();
 
-    const bucket = buckets.find((bucket) => bucket.Name.startsWith("cloudximage-imagestorebucket"));
+    const bucket = buckets.find((bucket) => bucket.Name.startsWith(newBucketName));
 
     let s3ListObjects = new S3GetListObjects();
     let objects = await s3ListObjects.getListObjects(bucket.Name);
@@ -104,7 +107,7 @@ test("View a list of uploaded images", async () => {
     let s3ListBuckets = new S3ListBuckets();
     let buckets = await s3ListBuckets.getListBuckets();
 
-    const bucket = buckets.find((bucket) => bucket.Name.startsWith("cloudximage-imagestorebucket"));
+    const bucket = buckets.find((bucket) => bucket.Name.startsWith(newBucketName));
 
     let s3ListObjects = new S3GetListObjects();
     let objects = await s3ListObjects.getListObjects(bucket.Name);
@@ -116,7 +119,7 @@ test("Delete an image from the S3 bucket", async () => {
     let s3ListBuckets = new S3ListBuckets();
     let buckets = await s3ListBuckets.getListBuckets();
 
-    const bucket = buckets.find((bucket) => bucket.Name.startsWith("cloudximage-imagestorebucket"));
+    const bucket = buckets.find((bucket) => bucket.Name.startsWith(newBucketName));
 
     let s3ListObjects = new S3GetListObjects();
     let objects = await s3ListObjects.getListObjects(bucket.Name);

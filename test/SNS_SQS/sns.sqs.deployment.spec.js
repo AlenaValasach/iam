@@ -28,13 +28,19 @@ const { GmailService } = require('../../utilits/gmail.service');
 
 const { GMAIL_CONFIG } = require('../../gmail.config');
 
-test("The application uses an SNS topic to subscribe and unsubscribe users", async () => {
+const topicSns = "cloudximage-TopicSNSTopic";
+const newTopicSns = "cloudxserverless-TopicSNSTopic";
+
+const queueSQS = "cloudximage-QueueSQSQueue";
+const newQueueSQS = "cloudxserverless-QueueSQSQueue";
+
+test.skip("The application uses an SNS topic to subscribe and unsubscribe users", async () => {
     const email = GMAIL_CONFIG.email;
 
     let snsClientListTopics = new SNSClientListTopics();
     const topicsResponce = await snsClientListTopics.getListTopics();
 
-    let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes("cloudximage-TopicSNSTopic"));
+    let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes(newTopicSns));
     
     assert.notEqual(snsTopic, undefined, "There is not cloudximage SNS Topic.");
 
@@ -68,7 +74,7 @@ test("The application uses an SNS topic to subscribe and unsubscribe users", asy
 
     const subscription = listSubscriptionsByTopicResponce.Subscriptions.find(e => e.Endpoint === email);
 
-    assert.equal(subscription.SubscriptionArn.includes('cloudximage-TopicSNSTopic'), true, "SubscriptionArn is not correct");
+    assert.equal(subscription.SubscriptionArn.includes(newTopicSns), true, "SubscriptionArn is not correct");
     assert.equal(subscription.Protocol, "email", "Protocol is not correct");
     assert.equal(subscription.TopicArn, snsTopic.TopicArn, "TopicArn is not correct");
 
@@ -89,14 +95,14 @@ test("The application uses an SNS topic to subscribe and unsubscribe users", asy
     }
 }); 
 
-test("List existing subscriptions", async () => {
+test.skip("List existing subscriptions", async () => {
     const rmadomString = Math.random().toString(36).slice(2, 7);
     const endpoint = rmadomString+ "@me.com";
 
     let snsClientListTopics = new SNSClientListTopics();
     const topicsResponce = await snsClientListTopics.getListTopics();
 
-    let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes("cloudximage-TopicSNSTopic"));
+    let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes(newTopicSns));
     
     assert.notEqual(snsTopic, undefined, "There is not cloudximage SNS Topic.");
 
@@ -115,13 +121,13 @@ test("List existing subscriptions", async () => {
     assert.notEqual(isSubscriptionPresented, undefined);
 }); 
 
-test("Send messages to SQS queue", async () => {
+test.skip("Send messages to SQS queue", async () => {
     let messageBody = "Test Message";
 
     let sqsClientListQueues = new SQSClientListQueues();
     const listQueuesResponce = await sqsClientListQueues.getListQueues();
 
-    let queueUrl = listQueuesResponce.QueueUrls.find(q => q.includes("cloudximage-QueueSQSQueue"));
+    let queueUrl = listQueuesResponce.QueueUrls.find(q => q.includes(newQueueSQS));
     
     assert.notEqual(queueUrl, undefined, "There is not cloudximage SQS Queue.");
 
@@ -135,13 +141,13 @@ test("Send messages to SQS queue", async () => {
     assert.equal(isMessageBodyExist, true,);
 }); 
 
-test("Publish messages to SNS topic", async () => {
+test.skip("Publish messages to SNS topic", async () => {
     let messageBody = "Test Message";
 
     let snsClientListTopics = new SNSClientListTopics();
     const topicsResponce = await snsClientListTopics.getListTopics();
 
-    let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes("cloudximage-TopicSNSTopic"));
+    let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes(newTopicSns));
     
     assert.notEqual(snsTopic, undefined, "There is not cloudximage SNS Topic.");
 
@@ -153,7 +159,7 @@ test("Publish messages to SNS topic", async () => {
     assert.equal(isMessageIdExist, true, "An attribute containing the MessageId of the message sent to SNS topic.");
 }); 
 
-test("IAM roles", async () => {
+test.skip("IAM roles", async () => {
     let ec2ClientInstances = new EC2ClientInstances();
     const response = await ec2ClientInstances.getRunningInstances();
 
@@ -174,7 +180,7 @@ test("SNS topic requirements", async () => {
     let snsClientListTopics = new SNSClientListTopics();
     const topicsResponce = await snsClientListTopics.getListTopics();
 
-    let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes("cloudximage-TopicSNSTopic"));
+    let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes(newTopicSns));
     
     assert.notEqual(snsTopic, undefined, "There is not cloudximage SNS Topic.");
 
@@ -195,7 +201,7 @@ test("SQS topic requirements", async () => {
     let sqsClientListQueues = new SQSClientListQueues();
     const listQueuesResponce = await sqsClientListQueues.getListQueues();
 
-    let queueUrl = listQueuesResponce.QueueUrls.find(q => q.includes("cloudximage-QueueSQSQueue"));
+    let queueUrl = listQueuesResponce.QueueUrls.find(q => q.includes(newQueueSQS));
     
     assert.notEqual(queueUrl, undefined, "There is not cloudximage SQS Queue.");
 

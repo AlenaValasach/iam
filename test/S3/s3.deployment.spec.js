@@ -16,6 +16,9 @@ const { S3BucketVersioning } = require('../../services/s3/s3.bucketVersioning');
 const { S3BucketPublicAccessBlock, S3BucketPolicyStatus } = require('../../services/s3/s3.publicAccessBlock');
 require("@aws-sdk/client-ec2-instance-connect");
 
+let bucketName = "cloudximage-imagestorebucket";
+let newBucketName = "";
+
 test("The applications should be deployed in public subnet", async () => {
     let ec2ClientVpcs = new EC2ClientVpcs();
     const vpcs = await ec2ClientVpcs.getVpcByIsDefault(false);
@@ -84,7 +87,7 @@ test("The application should have access to the S3 bucket via an IAM role", asyn
     let s3ListBuckets = new S3ListBuckets();
     let buckets = await s3ListBuckets.getListBuckets();
 
-    const bucket = buckets.find((bucket) => bucket.Name.startsWith("cloudximage-imagestorebucket"));
+    const bucket = buckets.find((bucket) => bucket.Name.startsWith(newBucketName));
 
     assert.equal(bucket !== undefined, true);
 

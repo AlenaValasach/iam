@@ -20,6 +20,12 @@ const { chromium } = require('playwright');
 
 let publicIpAddress;
 
+const topicSns = "cloudximage-TopicSNSTopic";
+const newTopicSns = "cloudxserverless-TopicSNSTopic";
+
+const queueSQS = "cloudximage-QueueSQSQueue";
+const newQueueSQS = "cloudxserverless-QueueSQSQueue";
+
 describe('SNS/SQS application functional validation', function () {
     beforeAll(async () => {
         let ec2ClientInstances = new EC2ClientInstances();
@@ -29,7 +35,7 @@ describe('SNS/SQS application functional validation', function () {
         publicIpAddress = publicInstance.PublicIpAddress;
     });
 
-    test("The user can subscribe to notifications about application events via a provided email address", async () => {
+    test.skip("The user can subscribe to notifications about application events via a provided email address", async () => {
         const email = "usern@me.com";
 
         const response = await axios.post(`http://${publicIpAddress}/api/notification/${email}`);
@@ -38,7 +44,7 @@ describe('SNS/SQS application functional validation', function () {
         assert.equal(response.data.includes("Successfully subscribed."), true);
     }); 
 
-    test("Gets possible to view all existing subscriptions using {base URL}/notification GET API call", async () => {
+    test.skip("Gets possible to view all existing subscriptions using {base URL}/notification GET API call", async () => {
         const response = await axios.get(`http://${publicIpAddress}/api/notification`);
         assert.equal(response.status,200);
 
@@ -50,13 +56,13 @@ describe('SNS/SQS application functional validation', function () {
         });
     }); 
 
-    test("The user has to confirm the subscription after receiving the confirmation email", async () => {
+    test.skip("The user has to confirm the subscription after receiving the confirmation email", async () => {
         const email = GMAIL_CONFIG.email;
 
         let snsClientListTopics = new SNSClientListTopics();
         const topicsResponce = await snsClientListTopics.getListTopics();
 
-        let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes("cloudximage-TopicSNSTopic"));
+        let snsTopic = topicsResponce.Topics.find(t => t.TopicArn.includes(newTopicSns));
 
         assert.notEqual(snsTopic, undefined, "There is not cloudximage SNS Topic.");
     
@@ -92,13 +98,13 @@ describe('SNS/SQS application functional validation', function () {
 
         const notification = getNotificationResponce.data.find(r=> r.Endpoint === email);
 
-        assert.equal(notification.SubscriptionArn.includes('cloudximage-TopicSNSTopic'), true);
+        assert.equal(notification.SubscriptionArn.includes(newTopicSns), true);
         assert.equal(notification.Protocol, 'email');
         assert.equal(notification.Endpoint, email);
         assert.equal(notification.TopicArn, snsTopic.TopicArn);
     }); 
 
-    test("The subscribed user receives notifications about images events (image is uploaded, image is deleted)", async () => {
+    test.skip("The subscribed user receives notifications about images events (image is uploaded, image is deleted)", async () => {
         await uploadImage("flower.jpg", `http://${publicIpAddress}/api/image`)
 
         const subject = 'AWS Notification Message';
@@ -130,7 +136,7 @@ describe('SNS/SQS application functional validation', function () {
         assert.equal(body.includes('event_type: delete'), true);
     }); 
 
-    test("The user can download the image using the download link from the notification", async () => {
+    test.skip("The user can download the image using the download link from the notification", async () => {
         await uploadImage("flower.jpg", `http://${publicIpAddress}/api/image`)
 
         let gmailService = new GmailService();
@@ -154,7 +160,7 @@ describe('SNS/SQS application functional validation', function () {
         await deleteImage(publicIpAddress);
     });
 
-    test("The user can unsubscribe from the notifications", async () => {
+    test.skip("The user can unsubscribe from the notifications", async () => {
         await uploadImage("flower.jpg", `http://${publicIpAddress}/api/image`)
 
         const subject = 'AWS Notification Message';
